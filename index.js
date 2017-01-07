@@ -3,10 +3,10 @@
 const path = require('path');
 const fs = require('fs')
 const log = require('npmlog')
-const patterns_list = require('./patterns_list.js')
+const patterns_list = require('satd-patterns')
 module.exports = getPackageCodeDebt
-// log.level = 'silly'
-getPackageCodeDebt("./readable-stream")
+module.exports.log = log.level
+
 
 function getPackageCodeDebt(pkg_path) {
     log.info('getPackageCodeDebt', pkg_path)
@@ -37,6 +37,7 @@ function getPackageCodeDebt(pkg_path) {
             result.debts += debt.debts
         }
     }
+    result.percentage = (result.debts/result.comments)
     log.silly('getPackageCodeDebt', result)
     return result
 }
@@ -79,8 +80,6 @@ function getFileContent(file_path) {
 
     try {
         var file = fs.readFileSync(file_path, {encoding: 'utf8'})
-        console.log('\n\n******** suahib ***********\n')
-        console.log(require.resolve('./node_modules/are-we-there-yet/'))
     } catch (e) {
         log.warn('Cannot read the code file', e.message)
         return ''

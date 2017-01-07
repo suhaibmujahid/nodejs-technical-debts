@@ -1,0 +1,21 @@
+{
+  "name": "example",
+  "version": "0.0.0",
+  "description": "Testing TD in an example package",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suhaibtamimi/nodejs-code-debt.git"
+  },
+  "keywords": [
+    "technical debt",
+    "design debt",
+    "code debt",
+    "example"
+  ],
+  "author": "Suhaib Mujahid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suhaibtamimi/nodejs-code-debt/issues"
+  }
+}
