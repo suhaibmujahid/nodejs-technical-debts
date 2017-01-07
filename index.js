@@ -4,15 +4,12 @@ const path = require('path');
 const fs = require('fs')
 const log = require('npmlog')
 const patterns_list = require('satd-patterns')
-module.exports = getPackageCodeDebt
-module.exports.log = log.level
+module.exports = detectTechnicalDebts
 
+function detectTechnicalDebts(pkg_path) {
+    log.info('detectTechnicalDebts', pkg_path)
 
-function getPackageCodeDebt(pkg_path) {
-    log.info('getPackageCodeDebt', pkg_path)
-
-    var metadata = getPackageMetadata(pkg_path)
-    var main_file_path = getMainFilePath(metadata, pkg_path)
+    var main_file_path = require.resolve(pkg_path)
 
     var result = {}
     result.files = {}
@@ -42,39 +39,6 @@ function getPackageCodeDebt(pkg_path) {
     return result
 }
 
-function getPackageMetadata(pkg_path) {
-    log.silly('getPackageMetadata', pkg_path)
-
-    var metadata_path = path.join(pkg_path, 'package.json')
-
-    try {
-        var metadata_file = fs.readFileSync(metadata_path, {encoding: 'utf8'})
-    } catch (e) {
-        log.warn('Read package.json', e.message)
-        return false
-    }
-
-    try {
-        var metadata = JSON.parse(metadata_file)
-    } catch (e) {
-        log.warn('Parse package.json', e.message)
-        return false
-    }
-
-    return metadata
-}
-
-function getMainFilePath(metadata, pkg_path) {
-    log.silly('getMainFilePath', pkg_path)
-
-    var main_file_path = path.join(pkg_path, metadata.main)
-    if (typeof main_file_path !== 'string') {
-        log.info('Module main file', 'cannot find in metadata, the default will be used (index.js)')
-        return path.join(pkg_path, 'index.js')
-    }
-    return main_file_path
-}
-
 function getFileContent(file_path) {
     log.silly('getFileContent', file_path)
 
@@ -91,7 +55,7 @@ function getFileContent(file_path) {
 function getFileLocalDepList(file, file_path) {
     log.silly('getFileLocalDepList', file_path)
 
-    const regex = /require\(.\.\/(.*?)\.js.\)/g
+    const regex = /require\(.(\.|\/)(.*?).\)/g
     var deps = file.match(regex)
 
     if (!deps) return []
@@ -100,7 +64,7 @@ function getFileLocalDepList(file, file_path) {
     deps.forEach(function (dep) {
         dep = dep.substring(9, dep.length - 2)
         var dir = path.dirname(file_path)
-        var dep_path = path.join(dir, dep)
+        var dep_path = require.resolve(dir+'/'+ dep)
         result.push(dep_path)
     })
     log.silly('getFileLocalDepList', result)

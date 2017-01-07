@@ -1,6 +1,6 @@
 var add = require("./lib/addition.js")
 var divide = require("./lib/division.js")
-var multiply = require("./lib/multiplication.js")
+var multiply = require("././lib/../lib/./multiplication")
 var sub = require("./lib/subtraction.js")
 
 

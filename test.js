@@ -3,7 +3,7 @@ import getPackageCodeDebt from './index.js'
 
 getPackageCodeDebt.log = 'warning'
 
-var x = getPackageCodeDebt("example/calculator")
+var x = getPackageCodeDebt("./example_packages/calculator")
 var listOfFiles = Object.keys(x.files)
 
 
