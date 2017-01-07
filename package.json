@@ -1,0 +1,27 @@
+{
+  "name": "detect-technical-debts",
+  "version": "0.0.1",
+  "description": "Detect Self-Admitted Technical Debts in NodeJS Packeges",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suhaibtamimi/nodejs-technical-debts.git"
+  },
+  "keywords": [
+    "technical debt",
+    "design debt",
+    "code debt"
+  ],
+  "author": "Suhaib Mujahid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suhaibtamimi/nodejs-technical-debts/issues"
+  },
+  "homepage": "https://github.com/suhaibtamimi/nodejs-technical-debts#readme",
+  "dependencies": {
+    "npmlog": "^4.0.2"
+  }
+}
