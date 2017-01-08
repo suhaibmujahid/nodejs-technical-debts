@@ -1,6 +1,6 @@
 {
   "name": "technical-debts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Detect Self-Admitted Technical Debts in NodeJS Packeges",
   "main": "index.js",
   "scripts": {

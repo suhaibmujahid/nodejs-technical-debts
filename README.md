@@ -13,7 +13,7 @@ $ npm install --save technical-debts
 ```js
 const detectTechnicalDebts = require('technical-debts');
 
-console.log(detectTechnicalDebts("./example_packages/calculator"));
+console.log(detectTechnicalDebts('./example_packages/calculator'));
 //{ files:
 //   { '... index.js': { debts: 0, comments: 0 },
 //     '... lib/addition.js': { debts: 1, comments: 2 },
